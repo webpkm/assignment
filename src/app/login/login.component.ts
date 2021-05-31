@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,8 @@ const PASSWORD_MAX_LENGH = 20;
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild('username') username!: ElementRef<HTMLInputElement>;
   loginFormGroup: FormGroup;
   isSubmitted: boolean = false;
   passwordMinLength: number = PASSWORD_MIN_LENGH;
@@ -46,4 +47,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    this.username.nativeElement.focus();
+  }
 }

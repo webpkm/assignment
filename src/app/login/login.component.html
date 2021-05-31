@@ -8,7 +8,7 @@
           <label for="username" class="form-label">Username</label>
           <input type="text"
             [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && loginFormGroup.controls['username'].hasError('required')}"
-            id="username" placeholder="Enter your username" formControlName="username" required>
+            id="username" placeholder="Enter your username" formControlName="username" required #username>
           <div class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['username'].hasError('required')">
             Please enter username.</div>
