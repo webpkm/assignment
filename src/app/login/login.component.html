@@ -3,14 +3,17 @@
     <div class="card-body">
       <h5 class="card-title text-center">Login here...</h5>
       <hr>
-      <form>
+      <form [formGroup]="loginFormGroup" (ngSubmit)="onLoginSubmit()">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="email" class="form-control" id="username" placeholder="Enter your username">
+          <input type="email" class="form-control" id="username" placeholder="Enter your username" formControlName="username" required>
+          <div class="invalid-feedback1 mt-2">Please enter username.</div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter your password">
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" required>
+          <div class="invalid-feedback1 mt-2">Please enter password.</div>
+          <div class="invalid-feedback1 mt-2">Please enter a valid password (Password should be between {{passwordMinLength}} and {{passwordMaxLength}}).</div>
         </div>
         <div class="mt-4 d-grid">
           <button class="btn btn-primary btn-block">Login</button>
