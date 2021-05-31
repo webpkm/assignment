@@ -12,6 +12,7 @@ const PASSWORD_MAX_LENGH = 20;
 
 export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
+  isSubmitted: boolean = false;
   passwordMinLength: number = PASSWORD_MIN_LENGH;
   passwordMaxLength: number = PASSWORD_MAX_LENGH;
 
@@ -32,13 +33,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
+    this.isSubmitted = true;
     console.log(this.loginFormGroup.value);
 
     // Check if login form is valid then hit the login service
     if (this.loginFormGroup.valid) {
 
-    } else {
-      alert('Please enter correct Username or Password');
     }
   }
 
