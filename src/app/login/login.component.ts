@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 const PASSWORD_MIN_LENGH = 6;
 const PASSWORD_MAX_LENGH = 20;
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   passwordMinLength: number = PASSWORD_MIN_LENGH;
   passwordMaxLength: number = PASSWORD_MAX_LENGH;
 
-  constructor() {
+  constructor(private readonly router: Router) {
     this.loginFormGroup = new FormGroup({
       username: new FormControl('', [
         Validators.required
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(PASSWORD_MIN_LENGH),
-        Validators.minLength(PASSWORD_MAX_LENGH)
+        Validators.maxLength(PASSWORD_MAX_LENGH)
       ]),
     });
   }
@@ -38,7 +39,10 @@ export class LoginComponent implements OnInit {
 
     // Check if login form is valid then hit the login service
     if (this.loginFormGroup.valid) {
-
+      // set the sessionStorage value so that we can check if user is logged in or not
+      sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('username', this.loginFormGroup.value.username);
+      this.router.navigate(['/dashboard']);
     }
   }
 

@@ -16,7 +16,7 @@
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input type="password"
-            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && loginFormGroup.controls['password'].hasError('required')}"
+            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && loginFormGroup.controls['password'].hasError('required') || (loginFormGroup.controls['password'].hasError('minlength') || loginFormGroup.controls['password'].hasError('maxlength'))}"
             id="password" placeholder="Enter your password" formControlName="password" required>
           <div class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['password'].hasError('required')">
