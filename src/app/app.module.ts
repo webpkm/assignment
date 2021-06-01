@@ -13,7 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { LoginService } from './shared/services/login.service';
 import { AuthGaurdService } from './shared/services/auth-gaurd.service';
-import { reducers } from './store/app.states';
+import { reducer } from './store/reducers/authentication.reducer';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { reducers } from './store/app.states';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers.authentication, {}),
+    StoreModule.forRoot(reducer, {}),
     EffectsModule.forRoot([AuthenticationEffects])
   ],
   providers: [
