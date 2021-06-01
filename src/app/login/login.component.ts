@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from '../shared/models/types';
-import { LoginService } from '../shared/services/login.service';
 import { Login } from '../store/actions/authentication.actions';
 import { selectAuthenticationState } from '../store/app.states';
 
@@ -29,9 +27,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   passwordMaxLength: number = PASSWORD_MAX_LENGH;
 
   constructor(
-    private readonly router: Router,
-    private readonly store: Store,
-    private readonly loginService: LoginService
+    private readonly store: Store
   ) {
     this.getState = this.store.select(selectAuthenticationState);
 
