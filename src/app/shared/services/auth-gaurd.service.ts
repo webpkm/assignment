@@ -18,6 +18,6 @@ export class AuthGaurdService implements CanActivate {
   }
 
   isUserLoggedIn(): boolean {
-    return sessionStorage.getItem('isLoggedIn') === 'true';
+    return sessionStorage.getItem('token') !== null;
   }
 }

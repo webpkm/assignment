@@ -10,7 +10,7 @@ export class LoginService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  login(): Observable<LoginResponse[]> {
+  login(username: string, password: string): Observable<LoginResponse[]> {
     return this.httpClient.get<LoginResponse[]>('./assets/login.data.json');
   }
 }

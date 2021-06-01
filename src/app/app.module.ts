@@ -8,6 +8,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationEffects } from './store/effects/authentication.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { LoginService } from './shared/services/login.service';
+import { AuthGaurdService } from './shared/services/auth-gaurd.service';
+import { reducers } from './store/app.states';
+
 
 @NgModule({
   declarations: [
@@ -21,9 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers.authentication, {}),
+    EffectsModule.forRoot([AuthenticationEffects])
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    AuthGaurdService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

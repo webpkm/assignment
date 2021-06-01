@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { User } from '../shared/models/types';
 import { LoginService } from '../shared/services/login.service';
+import { Login } from '../store/actions/authentication.actions';
+import { selectAuthenticationState } from '../store/app.states';
 
 const PASSWORD_MIN_LENGH = 6;
 const PASSWORD_MAX_LENGH = 20;
@@ -12,14 +17,24 @@ const PASSWORD_MAX_LENGH = 20;
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  user: User = new User();
+  getState!: Observable<any>;
+  errorMessage: string = '';
+
   @ViewChild('username') username!: ElementRef<HTMLInputElement>;
   loginFormGroup: FormGroup;
   isSubmitted: boolean = false;
   passwordMinLength: number = PASSWORD_MIN_LENGH;
   passwordMaxLength: number = PASSWORD_MAX_LENGH;
 
-  constructor(private readonly router: Router, private readonly loginService: LoginService) {
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly loginService: LoginService
+  ) {
+    this.getState = this.store.select(selectAuthenticationState);
+
     this.loginFormGroup = new FormGroup({
       username: new FormControl('', [
         Validators.required
@@ -32,27 +47,24 @@ export class LoginComponent implements AfterViewInit {
     });
   }
 
+  ngOnInit() {
+    this.getState.subscribe((state) => {
+      // console.log(state);
+      // this.errorMessage = state.errorMessage;
+    });
+  }
+
   onLoginSubmit() {
     this.isSubmitted = true;
     console.log(this.loginFormGroup.value);
 
     // Check if login form is valid then hit the login service
     if (this.loginFormGroup.valid) {
-      this.loginService.login().subscribe((response) => {
-        const user = response.find(user => user.username === this.loginFormGroup.value.username);
-        if (user) {
-          if (user.password === this.loginFormGroup.value.password) {
-            // set the sessionStorage value so that we can check if user is logged in or not
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('username', this.loginFormGroup.value.username);
-            this.router.navigate(['/dashboard']);
-          } else {
-            alert('Please enter correct username or password!');
-          }
-        } else {
-          alert('Please enter correct username or password!');
-        }
-      });
+      const actionPayload = {
+        username: this.loginFormGroup.value.username,
+        password: this.loginFormGroup.value.password
+      };
+      this.store.dispatch(new Login(actionPayload));
     }
   }
 
