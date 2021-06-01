@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
+import { LoginService } from '../shared/services/login.service';
 
 const PASSWORD_MIN_LENGH = 6;
 const PASSWORD_MAX_LENGH = 20;
