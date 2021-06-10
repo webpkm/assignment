@@ -18,7 +18,6 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: AuthenticationActions): State {
-  debugger;
   switch (action.type) {
     case AuthenticationActionTypes.LOGIN_SUCCESS: {
       return {

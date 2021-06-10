@@ -8,22 +8,23 @@ export enum AuthenticationActionTypes {
 }
 
 export class Login implements Action {
-  readonly type = AuthenticationActionTypes.LOGIN;
+  readonly type: AuthenticationActionTypes = AuthenticationActionTypes.LOGIN;
   constructor(public payload: any) { }
 }
 
 export class LoginSuccess implements Action {
-  readonly type = AuthenticationActionTypes.LOGIN_SUCCESS;
+  readonly type:AuthenticationActionTypes = AuthenticationActionTypes.LOGIN_SUCCESS;
   constructor(public payload: any) { }
 }
 
 export class LoginFailure implements Action {
-  readonly type = AuthenticationActionTypes.LOGIN_FAILURE;
+  readonly type:AuthenticationActionTypes = AuthenticationActionTypes.LOGIN_FAILURE;
   constructor(public payload: any) { }
 }
 
 export class Logout implements Action {
-  readonly type = AuthenticationActionTypes.LOGOUT;
+  readonly type:AuthenticationActionTypes = AuthenticationActionTypes.LOGOUT;
+  constructor(public payload: any) { }
 }
 
 export type AuthenticationActions =

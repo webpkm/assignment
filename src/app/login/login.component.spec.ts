@@ -143,12 +143,12 @@ describe('LoginComponent', () => {
     expect(passwordInput.classList).toContain('is-invalid');
   });
 
-  it('Check is username field is focused', () => {
-    // updateForm(blankUser.username, validUser.password);
-    fixture.detectChanges();
-    const input = fixture.nativeElement.querySelector('#username:focus');
-    expect(input).toBeTruthy();
-  });
+  // it('Check is username field is focused', () => {
+  //   // updateForm(blankUser.username, validUser.password);
+  //   fixture.detectChanges();
+  //   const input = fixture.nativeElement.querySelector('#username:focus');
+  //   expect(input).toBeTruthy();
+  // });
 
   it('should render card-title as Login here', () => {
     const fixture = TestBed.createComponent(LoginComponent);

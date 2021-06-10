@@ -25,12 +25,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getState.subscribe((state) => {
-      this.user = state;
+      if (state) {
+        this.user = state.user;
+      }
     });
   }
 
   logout(): void {
-    this.store.dispatch(new Logout);
+    this.store.dispatch(new Logout(""));
     this.router.navigate(['login']);
   }
 }
