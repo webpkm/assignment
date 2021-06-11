@@ -51,6 +51,7 @@ describe("Router: App", () => {
     });
   }));
   it('navigate to "dashboard" takes you to /login incase of not logged in', fakeAsync(() => {
+    sessionStorage.clear();
     router.navigate(["/dashboard"]).then(() => {
       expect(location.path()).toBe("/login");
     });
