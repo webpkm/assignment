@@ -22,4 +22,24 @@ describe('AuthGaurdService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should isUserLoggedIn to be true', () => {
+    sessionStorage.setItem('token', 'test123');
+    expect(service.isUserLoggedIn()).toBeTrue();
+  });
+
+  it('should isUserLoggedIn to be false', () => {
+    sessionStorage.clear();
+    expect(service.isUserLoggedIn()).toBeFalse();
+  });
+
+  it('should canActivate to be true', () => {
+    sessionStorage.setItem('token', 'test123');
+    expect(service.canActivate()).toBeTrue();
+  });
+
+  it('should canActivate to be false', () => {
+    sessionStorage.clear();
+    expect(service.canActivate()).toBeFalse();
+  });
 });

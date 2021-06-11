@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { TestBed, fakeAsync } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { Router } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
@@ -60,6 +60,16 @@ describe("Router: App", () => {
     sessionStorage.setItem('token', 'token123');
     router.navigate(["/dashboard"]).then(() => {
       expect(location.path()).toBe("/dashboard");
+    });
+  }));
+  it('navigate to "page-not-found" takes you to /page-not-found as ** router is added', fakeAsync(() => {
+    const fixture = TestBed.createComponent(PageNotFoundComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    router.navigate(["/page-not-found"]).then(() => {
+      expect(location.path()).toBe("/page-not-found");
+      fixture.detectChanges();
+      expect(compiled.querySelector('h1').textContent).toContain('404 Error: Page not found!');
     });
   }));
 });
