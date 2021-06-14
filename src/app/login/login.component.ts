@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.loginFormGroup = new FormGroup({
       username: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.email
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -45,8 +46,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getState.subscribe((state) => {
-      // console.log(state);
-      // this.errorMessage = state.errorMessage;
+      console.log(state);
+      this.errorMessage = state.errorMessage;
     });
   }
 

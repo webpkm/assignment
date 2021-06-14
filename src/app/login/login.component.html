@@ -6,17 +6,20 @@
       <form [formGroup]="loginFormGroup" (ngSubmit)="onLoginSubmit()">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="text"
-            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && loginFormGroup.controls['username'].hasError('required')}"
+          <input type="email"
+            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && (loginFormGroup.controls['username'].hasError('required') || loginFormGroup.controls['username'].hasError('email'))}"
             id="username" placeholder="Enter your username" formControlName="username" required #username>
           <div id="username-error-msg" class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['username'].hasError('required')">
-            Please enter username.</div>
+            Please enter a username.</div>
+          <div id="username-error-msg" class="invalid-feedback mt-2"
+            *ngIf="isSubmitted && loginFormGroup.controls['username'].hasError('email')">
+            Please enter a correct username.</div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input type="password"
-            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && loginFormGroup.controls['password'].hasError('required') || (loginFormGroup.controls['password'].hasError('minlength') || loginFormGroup.controls['password'].hasError('maxlength'))}"
+            [ngClass]="{'form-control': true, 'is-invalid': isSubmitted && (loginFormGroup.controls['password'].hasError('required') || (loginFormGroup.controls['password'].hasError('minlength') || loginFormGroup.controls['password'].hasError('maxlength')))}"
             id="password" placeholder="Enter your password" formControlName="password" required>
           <div id="password-error-msg1" class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['password'].hasError('required')">
@@ -32,7 +35,7 @@
       </form>
     </div>
   </div>
-  <div class="mt-4">
+  <!-- <div class="mt-4">
     <h3>Sample user to login.</h3>
     <code>
       <div>
@@ -42,5 +45,5 @@
         Password: <strong>test@123</strong>
       </div>
     </code>
-  </div>
+  </div> -->
 </div>
