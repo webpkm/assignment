@@ -47,7 +47,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getState.subscribe((state) => {
       // console.log(state);
-      this.errorMessage = state.errorMessage;
+      if (state && state.errorMessage) {
+        this.errorMessage = state.errorMessage;
+      }
     });
   }
 

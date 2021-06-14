@@ -18,10 +18,10 @@
             id="username" placeholder="Enter your username" formControlName="username" required #username>
           <div id="username-error-msg" class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['username'].hasError('required')">
-            Please enter a username.</div>
+            Please enter username.</div>
           <div id="username-error-msg" class="invalid-feedback mt-2"
             *ngIf="isSubmitted && loginFormGroup.controls['username'].hasError('email')">
-            Please enter a correct username.</div>
+            Please enter correct username.</div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>

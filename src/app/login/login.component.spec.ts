@@ -10,8 +10,13 @@ import { LoginService } from '../shared/services/login.service';
 import { LoginComponent } from './login.component';
 
 const validUser = {
-  username: 'test',
+  username: 'test@gmail.com',
   password: 'test@123'
+}
+
+const invalidUsername = {
+  username: 'test',
+  password: 'test'
 }
 
 const invalidPassword = {
@@ -70,6 +75,19 @@ describe('LoginComponent', () => {
     const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('#username-error-msg');
     expect(usernameErrorMsg).toBeDefined();
     expect(usernameErrorMsg.innerHTML).toContain('Please enter username.');
+  });
+
+  it('Display invalid username Error Msg when Username is invalid', () => {
+    updateForm(invalidUsername.username, invalidUsername.password);
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.nativeElement.querySelector('#login');
+    button.click();
+    fixture.detectChanges();
+
+    const usernameErrorMsg = fixture.debugElement.nativeElement.querySelector('#username-error-msg');
+    expect(usernameErrorMsg).toBeDefined();
+    expect(usernameErrorMsg.innerHTML).toContain('Please enter correct username.');
   });
 
   it('Display Password Error Msg when Username is blank', () => {
