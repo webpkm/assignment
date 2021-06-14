@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { LoginService } from './shared/services/login.service';
 import { AuthGaurdService } from './shared/services/auth-gaurd.service';
 import { reducers } from './store/app.states';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -30,7 +32,10 @@ import { reducers } from './store/app.states';
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, {}),
-    EffectsModule.forRoot([AuthenticationEffects])
+    EffectsModule.forRoot([AuthenticationEffects]),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production
+    }),
   ],
   providers: [
     LoginService,
