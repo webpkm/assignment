@@ -4,6 +4,13 @@
       <h5 class="card-title text-center">Login here...</h5>
       <hr>
       <form [formGroup]="loginFormGroup" (ngSubmit)="onLoginSubmit()">
+        <div class="card mb-3" *ngIf="errorMessage">
+          <div class="card-body text-center">
+            <span class="text-danger">
+              <strong>{{errorMessage}}</strong>
+            </span>
+          </div>
+        </div>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
           <input type="email"
