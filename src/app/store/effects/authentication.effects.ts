@@ -32,11 +32,11 @@ export class AuthenticationEffects {
             const user: any = users.find(u => u.username === payload.username);
             if (user) {
               if (user.password === payload.password) {
-                console.log(user);
+                // console.log(user);
                 return new LoginSuccess({ token: '12345', username: payload.username });
               }
             }
-            return of(new LoginFailure({ error: 'Invalid username or password' }));
+            return new LoginFailure({ error: 'Invalid username or password' });
           }),
           catchError((error) => {
             return of(new LoginFailure({ error: error }));

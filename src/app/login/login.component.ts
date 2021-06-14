@@ -46,14 +46,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getState.subscribe((state) => {
-      console.log(state);
+      // console.log(state);
       this.errorMessage = state.errorMessage;
     });
   }
 
   onLoginSubmit() {
     this.isSubmitted = true;
-    console.log(this.loginFormGroup.value);
+    // console.log(this.loginFormGroup.value);
 
     // Check if login form is valid then hit the login service
     if (this.loginFormGroup.valid) {
