@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from '../shared/models/types';
-import { Login } from '../store/actions/authentication.actions';
+import { LoginSuccess } from '../store/actions/authentication.actions';
 import { selectAuthenticationState } from '../store/app.states';
 
 const PASSWORD_MIN_LENGH = 6;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         username: this.loginFormGroup.value.username,
         password: this.loginFormGroup.value.password
       };
-      this.store.dispatch(new Login(actionPayload));
+      this.store.dispatch(new LoginSuccess(actionPayload));
     }
   }
 
