@@ -16,6 +16,7 @@ import { AuthGaurdService } from './shared/services/auth-gaurd.service';
 import { reducers } from './store/app.states';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 @NgModule({
@@ -33,6 +34,10 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AuthenticationEffects]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
     }),
